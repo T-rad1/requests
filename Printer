@@ -1,0 +1,33 @@
+def printer(name):
+  import win32print
+  import win32ui
+
+  def printer():
+    # دریافت نام پرینتر پیش‌فرض
+    printer_name = win32print.GetDefaultPrinter()
+
+    # ایجاد یک DC (Device Context) برای پرینتر
+    hprinter_dc = win32ui.CreateDC()
+    hprinter_dc.CreatePrinterDC(printer_name)
+
+    # شروع یک سند چاپ جدید
+    hprinter_dc.StartDoc(name)
+    hprinter_dc.StartPage()
+
+    # ایجاد و تنظیم یک فونت
+    #font = win32ui.CreateFont({
+    #    "name": "Arial",  # نام فونت
+    #    "height": 36,     # اندازه فونت (بزرگتر از مقدار پیش‌فرض)
+    #    "weight": 700,    # ضخامت فونت (700 = Bold)
+    #})
+
+    # اعمال فونت به DC
+    #hprinter_dc.SelectObject(font)
+
+    # ارسال متن با فونت جدید
+
+    hprinter_dc.TextOut(100, 100, "This is a test print !") 
+    # پایان صفحه و سند
+    hprinter_dc.EndPage()
+    hprinter_dc.EndDoc()
+    hprinter_dc.DeleteDC()
